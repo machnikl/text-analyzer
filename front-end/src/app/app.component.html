@@ -1,3 +1,21 @@
 <div class="container">
   <h1 class="heading">Analyze Word</h1>
+
+  <app-text-input
+    [(inputFieldValue)]="inputValue"
+    class="input-field"
+  ></app-text-input>
+
+  <div class="button-container">
+    <app-button
+      class="btn"
+      [text]="'COUNT VOWELS'"
+      (click)="countLetters('vowels')"
+    ></app-button>
+    <app-button
+      class="btn"
+      [text]="'COUNT CONSONANTS'"
+      (click)="countLetters('consonants')"
+    ></app-button>
+  </div>
 </div>

@@ -1,1 +1,6 @@
-<p>text-input works!</p>
+<input
+  type="text"
+  class="input-field"
+  [(ngModel)]="inputFieldValue"
+  (ngModelChange)="inputFieldValueChange.emit(inputFieldValue)"
+/>

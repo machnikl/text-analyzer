@@ -1,0 +1,17 @@
+@import "/src/app/styles/base/variables";
+
+:host {
+  position: relative;
+  display: block;
+}
+
+.button {
+  display:inline-block;
+  background-color: $color-main;
+  color: white;
+  cursor:pointer;
+  vertical-align:middle;
+  border-radius: 5px;
+  padding: 0.8rem;
+  text-align: center;
+}

@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss']
+  styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent implements OnInit {
+  @Input() inputFieldValue: string = '';
 
-  constructor() { }
+  @Output() inputFieldValueChange: EventEmitter<string> =
+    new EventEmitter<string>();
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }
