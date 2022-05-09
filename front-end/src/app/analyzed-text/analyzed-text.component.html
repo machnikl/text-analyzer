@@ -1,1 +1,9 @@
-<p>analyzed-text works!</p>
+<div class="card">
+  <span>{{ analyzedText.textInput }}</span>
+
+  <div *ngFor="let letter of analyzedText.letterList | keyvalue">
+    {{ letter.key }}: {{ letter.value }}
+  </div>
+
+  <span>{{ analyzedText.letterType }}</span>
+</div>

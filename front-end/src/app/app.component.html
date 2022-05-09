@@ -18,4 +18,11 @@
       (click)="countLetters('consonants')"
     ></app-button>
   </div>
+
+  <div class="analyzed-words-container">
+    <app-analyzed-text
+      *ngFor="let word of analyzedWords"
+      [analyzedText]="word"
+    ></app-analyzed-text>
+  </div>
 </div>
