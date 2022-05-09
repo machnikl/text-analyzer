@@ -20,4 +20,15 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .analyzed-words-container {
+    display: flex;
+    flex-direction: column;
+
+    .analyzed-text {
+      margin-top: 1.2rem;
+    }
+  }
+
+
 }

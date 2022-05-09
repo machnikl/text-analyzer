@@ -1,4 +1,9 @@
 <div class="container">
+  <app-toggle [(checkboxValue)]="isOnline"></app-toggle>
+
+  <span *ngIf="isOnline">Online</span>
+  <span *ngIf="!isOnline">Offline</span>
+
   <h1 class="heading">Analyze Word</h1>
 
   <app-text-input
@@ -20,9 +25,11 @@
   </div>
 
   <div class="analyzed-words-container">
-    <app-analyzed-text
-      *ngFor="let word of analyzedWords"
-      [analyzedText]="word"
-    ></app-analyzed-text>
+    <div class="analyzed-text">
+      <app-analyzed-text
+        *ngFor="let word of analyzedWords"
+        [analyzedText]="word"
+      ></app-analyzed-text>
+    </div>
   </div>
 </div>

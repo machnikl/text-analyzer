@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiConnectorWordAnalyzerService } from './io/api-connector-word-analyzer.service';
 
-export enum OnlineStatus {
-  ONLINE,
-  OFFLINE,
-}
-
 export interface AnalyzedText {
   textInput: string;
   letterType: string;
@@ -19,8 +14,7 @@ export interface AnalyzedText {
 })
 export class AppComponent {
   public inputValue = '';
-  public onlineStati = OnlineStatus;
-  public onlineStatus = OnlineStatus.OFFLINE;
+  public isOnline = false;
   public analyzedWords: AnalyzedText[] = [];
 
   constructor(
@@ -28,15 +22,21 @@ export class AppComponent {
   ) {}
 
   public countLetters(letterType: string) {
-    this._apiConnectorWordAnalyzer
-      .analyzeWords(this.inputValue, letterType)
-      .subscribe((data: AnalyzedText) => {
-        this.analyzedWords.push(data);
-        console.log(this.analyzedWords);
-      });
+    if (this.isOnline) {
+      this._apiConnectorWordAnalyzer
+        .analyzeWords(this.inputValue, letterType)
+        .subscribe((data: AnalyzedText) => {
+          this.analyzedWords.push(data);
+        });
+    } else {
+    }
   }
 
-  public switchOnlineStatus(newStatus: OnlineStatus) {
-    this.onlineStatus = newStatus;
+  public switchOnlineStatus() {
+    console.log(this.isOnline);
+  }
+
+  public analyzeTextOffline() {
+    // logic for offline analysis
   }
 }

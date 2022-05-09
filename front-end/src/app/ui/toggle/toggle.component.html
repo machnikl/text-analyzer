@@ -1,1 +1,8 @@
-<p>toggle works!</p>
+<label class="switch">
+  <input
+    type="checkbox"
+    [(ngModel)]="checkboxValue"
+    (ngModelChange)="checkboxValueChange.emit(checkboxValue)"
+  />
+  <span class="slider round"></span>
+</label>
