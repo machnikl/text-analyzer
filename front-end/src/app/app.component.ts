@@ -16,6 +16,7 @@ export class AppComponent {
   public inputValue = '';
   public isOnline = false;
   public analyzedWords: AnalyzedText[] = [];
+  public offlineLetters: any = {};
 
   constructor(
     private _apiConnectorWordAnalyzer: ApiConnectorWordAnalyzerService
@@ -29,14 +30,46 @@ export class AppComponent {
           this.analyzedWords.push(data);
         });
     } else {
+      this.analyzeTextOffline(letterType);
     }
   }
 
-  public switchOnlineStatus() {
-    console.log(this.isOnline);
+  public analyzeTextOffline(letterType: string) {
+    let newWord: AnalyzedText = {
+      textInput: this.inputValue,
+      letterType: letterType,
+      letterList: [],
+    };
+
+    const uppercaseInput: string = this.inputValue.toUpperCase();
+    const charArray: string[] = uppercaseInput.split('');
+
+    if (letterType === 'vowels') {
+      for (let i = 0; i < charArray.length; i++) {
+        if (this.isVowel(charArray[i])) {
+          this.addLetterToLetterList(charArray[i], letterType);
+        }
+      }
+    } else if (letterType === 'consonants') {
+      for (let i = 0; i < charArray.length; i++) {
+        if (!this.isVowel(charArray[i])) {
+          this.addLetterToLetterList(charArray[i], letterType);
+        }
+      }
+    }
+    newWord.letterList = this.offlineLetters;
+    this.analyzedWords.push(newWord);
+    this.offlineLetters = {};
   }
 
-  public analyzeTextOffline() {
-    // logic for offline analysis
+  public isVowel(letter: string): boolean {
+    return /^[aeiou]$/i.test(letter);
+  }
+
+  public addLetterToLetterList(letter: string, letterType: string) {
+    const currentCount: number = !isNaN(this.offlineLetters[letter])
+      ? this.offlineLetters[letter]
+      : 0;
+    this.offlineLetters[letter] = currentCount + 1;
   }
 }
