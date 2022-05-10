@@ -8,6 +8,7 @@ import { TextInputComponent } from './ui/text-input/text-input.component';
 import { AnalyzedTextComponent } from './analyzed-text/analyzed-text.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     TextInputComponent,
     AnalyzedTextComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, NgChartsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

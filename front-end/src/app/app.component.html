@@ -28,11 +28,8 @@
   </div>
 
   <div class="analyzed-words-container">
-    <div class="analyzed-text">
-      <app-analyzed-text
-        *ngFor="let word of analyzedWords"
-        [analyzedText]="word"
-      ></app-analyzed-text>
+    <div class="analyzed-text" *ngFor="let word of analyzedWords">
+      <app-analyzed-text [analyzedText]="word"></app-analyzed-text>
     </div>
   </div>
 </div>

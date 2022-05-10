@@ -1,9 +1,16 @@
 <div class="card">
-  <span>{{ analyzedText.textInput }}</span>
+  <span class="label"><strong>Word: </strong>{{ analyzedText.textInput }}</span>
 
-  <div *ngFor="let letter of analyzedText.letterList | keyvalue">
-    {{ letter.key }}: {{ letter.value }}
+  <div class="chart">
+    <canvas
+      baseChart
+      [data]="pieChartData"
+      [type]="pieChartType"
+      [options]="pieChartOptions"
+    >
+    </canvas>
   </div>
-
-  <span>{{ analyzedText.letterType }}</span>
+  <span class="label letter-type"
+    ><strong>Analyzed:</strong> {{ analyzedText.letterType }}</span
+  >
 </div>
