@@ -40,7 +40,10 @@ export class AppComponent {
       letterList: [],
     };
 
-    const uppercaseInput: string = this.inputValue.toUpperCase();
+    const uppercaseInput: string = this.inputValue
+      .replace(/\s/g, '')
+      .toUpperCase();
+    console.log(uppercaseInput);
     const charArray: string[] = uppercaseInput.split('');
     let tmpLetterList: any = {};
 

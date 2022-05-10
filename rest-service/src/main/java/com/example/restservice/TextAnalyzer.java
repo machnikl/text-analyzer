@@ -27,7 +27,7 @@ public class TextAnalyzer {
     }
 
     private void countLetters() {
-        String uppercaseInput = this.textInput.toUpperCase();
+        String uppercaseInput = this.textInput.toUpperCase().replaceAll("\\s+","");
         char[] chars = uppercaseInput.toCharArray();
 
         for (int i = 0; i < chars.length; i++) {
@@ -36,7 +36,6 @@ public class TextAnalyzer {
             }
         }
     }
-
 
     private boolean isVowel(char c) {
         return "AEIOU".indexOf(c) != -1;

@@ -9,6 +9,7 @@ import { AnalyzedTextComponent } from './analyzed-text/analyzed-text.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
+import { NoSpecialCharactersDirective } from './directives/no-special-characters.directive';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NgChartsModule } from 'ng2-charts';
     ButtonComponent,
     TextInputComponent,
     AnalyzedTextComponent,
+    NoSpecialCharactersDirective,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, NgChartsModule],
   providers: [],

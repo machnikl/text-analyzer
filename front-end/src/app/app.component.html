@@ -17,11 +17,13 @@
 
     <div class="button-container">
       <app-button
+        [ngClass]="{ disabled: inputValue === '' }"
         class="btn"
         [text]="'COUNT VOWELS'"
         (click)="countLetters('vowels')"
       ></app-button>
       <app-button
+        [ngClass]="{ disabled: inputValue === '' }"
         class="btn"
         [text]="'COUNT CONSONANTS'"
         (click)="countLetters('consonants')"
