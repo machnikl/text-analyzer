@@ -5,6 +5,26 @@
   width: 100vw;
   height: 100vh;
 
+  .toggle-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 3.2rem;
+
+    .toggle-status {
+      margin-left: 1rem;
+      font-size: 1.4rem;
+
+      .offline {
+        color: red;
+      }
+      .online {
+        color: green;
+      }
+    }
+  }
+
   .heading {
     text-align: center;
     color: $color-main;
