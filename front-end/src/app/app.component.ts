@@ -16,7 +16,6 @@ export class AppComponent {
   public inputValue = '';
   public isOnline = false;
   public analyzedWords: AnalyzedText[] = [];
-  public offlineLetters: any = {};
 
   constructor(
     private _apiConnectorWordAnalyzer: ApiConnectorWordAnalyzerService
@@ -43,23 +42,23 @@ export class AppComponent {
 
     const uppercaseInput: string = this.inputValue.toUpperCase();
     const charArray: string[] = uppercaseInput.split('');
+    let tmpLetterList: any = {};
 
-    this.checkLettersForAnalysis(letterType === 'vowels', charArray);
-
-    newWord.letterList = this.offlineLetters;
-    this.analyzedWords.push(newWord);
-    this.offlineLetters = {};
-  }
-
-  public checkLettersForAnalysis(isVowel: boolean, charArray: string[]) {
     for (let i = 0; i < charArray.length; i++) {
-      if (isVowel ? this.isVowel(charArray[i]) : !this.isVowel(charArray[i])) {
-        const currentCount: number = !isNaN(this.offlineLetters[charArray[i]])
-          ? this.offlineLetters[charArray[i]]
+      if (
+        letterType === 'vowels'
+          ? this.isVowel(charArray[i])
+          : !this.isVowel(charArray[i])
+      ) {
+        const currentCount: number = !isNaN(tmpLetterList[charArray[i]])
+          ? tmpLetterList[charArray[i]]
           : 0;
-        this.offlineLetters[charArray[i]] = currentCount + 1;
+        tmpLetterList[charArray[i]] = currentCount + 1;
       }
     }
+
+    newWord.letterList = tmpLetterList;
+    this.analyzedWords.push(newWord);
   }
 
   public isVowel(letter: string): boolean {

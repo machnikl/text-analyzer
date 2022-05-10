@@ -30,20 +30,13 @@ public class TextAnalyzer {
         String uppercaseInput = this.textInput.toUpperCase();
         char[] chars = uppercaseInput.toCharArray();
 
-        if (Objects.equals(letterType, "vowels")) {
-            for (int i = 0; i < chars.length; i++) {
-                if (this.isVowel(chars[i])) {
-                    this.addLetterToLetterList(String.valueOf(chars[i]));
-                }
-            }
-        } else if (Objects.equals(letterType, "consonants")) {
-            for (int i = 0; i < chars.length; i++) {
-                if (!this.isVowel(chars[i])) {
-                    this.addLetterToLetterList(String.valueOf(chars[i]));
-                }
+        for (int i = 0; i < chars.length; i++) {
+            if (Objects.equals(letterType, "vowels") ? this.isVowel(chars[i]) : !this.isVowel(chars[i])) {
+                this.addLetterToLetterList(String.valueOf(chars[i]));
             }
         }
     }
+
 
     private boolean isVowel(char c) {
         return "AEIOU".indexOf(c) != -1;
