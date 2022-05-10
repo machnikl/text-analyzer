@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AnalyzedText } from '../app.component';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
@@ -13,6 +14,7 @@ export class AnalyzedTextComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   public pieChartType: ChartType = 'pie';
+  public pieChartPlugins = [DatalabelsPlugin];
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [],
     datasets: [
@@ -21,7 +23,6 @@ export class AnalyzedTextComponent implements OnInit {
       },
     ],
   };
-
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     plugins: {
@@ -35,34 +36,15 @@ export class AnalyzedTextComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    Object.entries(this.analyzedText.letterList).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`);
+    this.prepareChartData();
+  }
 
+  public prepareChartData(): void {
+    Object.entries(this.analyzedText.letterList).forEach(([key, value]) => {
       this.pieChartData.labels!.push(key);
       // @ts-ignore
       this.pieChartData.datasets[0].data.push(value);
     });
     this.pieChartData.labels = [...Object.keys(this.analyzedText.letterList)];
-  }
-
-  // events
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event: ChartEvent;
-    active: {}[];
-  }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event: ChartEvent;
-    active: {}[];
-  }): void {
-    console.log(event, active);
   }
 }

@@ -26,7 +26,7 @@ export class AppComponent {
       this._apiConnectorWordAnalyzer
         .analyzeWords(this.inputValue, letterType)
         .subscribe((data: AnalyzedText) => {
-          this.analyzedWords.push(data);
+          this.analyzedWords.unshift(data);
         });
     } else {
       this.analyzeTextOffline(letterType);
@@ -58,7 +58,7 @@ export class AppComponent {
     }
 
     newWord.letterList = tmpLetterList;
-    this.analyzedWords.push(newWord);
+    this.analyzedWords.unshift(newWord);
   }
 
   public isVowel(letter: string): boolean {
