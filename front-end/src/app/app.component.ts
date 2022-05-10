@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiConnectorWordAnalyzerService } from './io/api-connector-word-analyzer.service';
+import { WordAnalyzerService } from './io/word-analyzer.service';
 
 export interface AnalyzedText {
   textInput: string;
@@ -17,54 +17,22 @@ export class AppComponent {
   public isOnline = false;
   public analyzedWords: AnalyzedText[] = [];
 
-  constructor(
-    private _apiConnectorWordAnalyzer: ApiConnectorWordAnalyzerService
-  ) {}
+  constructor(private _wordAnalyzerService: WordAnalyzerService) {}
 
-  public countLetters(letterType: string) {
+  public analyzeWords(letterType: string) {
     if (this.isOnline) {
-      this._apiConnectorWordAnalyzer
-        .analyzeWords(this.inputValue, letterType)
+      this._wordAnalyzerService
+        .fetchWords(this.inputValue, letterType)
         .subscribe((data: AnalyzedText) => {
           this.analyzedWords.unshift(data);
         });
     } else {
-      this.analyzeTextOffline(letterType);
+      this.analyzedWords.unshift(
+        this._wordAnalyzerService.analyzeTextOffline(
+          letterType,
+          this.inputValue
+        )
+      );
     }
-  }
-
-  public analyzeTextOffline(letterType: string) {
-    let newWord: AnalyzedText = {
-      textInput: this.inputValue,
-      letterType: letterType,
-      letterList: [],
-    };
-
-    const uppercaseInput: string = this.inputValue
-      .replace(/\s/g, '')
-      .toUpperCase();
-    console.log(uppercaseInput);
-    const charArray: string[] = uppercaseInput.split('');
-    let tmpLetterList: any = {};
-
-    for (let i = 0; i < charArray.length; i++) {
-      if (
-        letterType === 'vowels'
-          ? this.isVowel(charArray[i])
-          : !this.isVowel(charArray[i])
-      ) {
-        const currentCount: number = !isNaN(tmpLetterList[charArray[i]])
-          ? tmpLetterList[charArray[i]]
-          : 0;
-        tmpLetterList[charArray[i]] = currentCount + 1;
-      }
-    }
-
-    newWord.letterList = tmpLetterList;
-    this.analyzedWords.unshift(newWord);
-  }
-
-  public isVowel(letter: string): boolean {
-    return /^[aeiou]$/i.test(letter);
   }
 }
