@@ -11,6 +11,8 @@ The Frontend is build with Angular 13.
 
 ### Development server
 
+cd into the front-end folder
+
 Run `npm i` to install all necessary dependencies.
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
@@ -18,6 +20,8 @@ Run `ng test` to run the unit tests of the frontend.
 
 
 ## Backend
+cd into the rest-service folder
+
 The backend is setup with Spring and Java 8.
 The backend server needs to be running for the Frontend to work.
 This was the first Java BE Server I ever set up, which results in a very basic approach.
