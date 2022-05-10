@@ -27,7 +27,7 @@ public class TextAnalyzer {
     }
 
     private void countLetters() {
-        String uppercaseInput = this.textInput.toUpperCase().replaceAll("\\s+","");
+        String uppercaseInput = this.textInput.toUpperCase().replaceAll("[^a-zA-Z]","");
         char[] chars = uppercaseInput.toCharArray();
 
         for (int i = 0; i < chars.length; i++) {

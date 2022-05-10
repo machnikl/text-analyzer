@@ -22,7 +22,9 @@ export class WordAnalyzerService {
       letterList: [],
     };
 
-    const uppercaseInput: string = inputValue.replace(/\s/g, '').toUpperCase();
+    const uppercaseInput: string = inputValue
+      .replace(/[^a-zA-Z]/g, '')
+      .toUpperCase();
     const charArray: string[] = uppercaseInput.split('');
     let tmpLetterList: any = {};
 
