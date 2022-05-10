@@ -44,32 +44,25 @@ export class AppComponent {
     const uppercaseInput: string = this.inputValue.toUpperCase();
     const charArray: string[] = uppercaseInput.split('');
 
-    if (letterType === 'vowels') {
-      for (let i = 0; i < charArray.length; i++) {
-        if (this.isVowel(charArray[i])) {
-          this.addLetterToLetterList(charArray[i], letterType);
-        }
-      }
-    } else if (letterType === 'consonants') {
-      for (let i = 0; i < charArray.length; i++) {
-        if (!this.isVowel(charArray[i])) {
-          this.addLetterToLetterList(charArray[i], letterType);
-        }
-      }
-    }
+    this.checkLettersForAnalysis(letterType === 'vowels', charArray);
+
     newWord.letterList = this.offlineLetters;
     this.analyzedWords.push(newWord);
     this.offlineLetters = {};
   }
 
-  public isVowel(letter: string): boolean {
-    return /^[aeiou]$/i.test(letter);
+  public checkLettersForAnalysis(isVowel: boolean, charArray: string[]) {
+    for (let i = 0; i < charArray.length; i++) {
+      if (isVowel ? this.isVowel(charArray[i]) : !this.isVowel(charArray[i])) {
+        const currentCount: number = !isNaN(this.offlineLetters[charArray[i]])
+          ? this.offlineLetters[charArray[i]]
+          : 0;
+        this.offlineLetters[charArray[i]] = currentCount + 1;
+      }
+    }
   }
 
-  public addLetterToLetterList(letter: string, letterType: string) {
-    const currentCount: number = !isNaN(this.offlineLetters[letter])
-      ? this.offlineLetters[letter]
-      : 0;
-    this.offlineLetters[letter] = currentCount + 1;
+  public isVowel(letter: string): boolean {
+    return /^[aeiou]$/i.test(letter);
   }
 }
