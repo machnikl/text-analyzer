@@ -1,35 +1,37 @@
-<div class="container">
-  <div class="toggle-container">
-    <app-toggle [(checkboxValue)]="isOnline"></app-toggle>
-    <div class="toggle-status">
-      <span class="online" *ngIf="isOnline">Online</span>
-      <span class="offline" *ngIf="!isOnline">Offline</span>
+<div class="page-wrapper">
+  <div class="container">
+    <div class="toggle-container">
+      <app-toggle [(checkboxValue)]="isOnline"></app-toggle>
+      <div class="toggle-status">
+        <span class="online" *ngIf="isOnline">Online</span>
+        <span class="offline" *ngIf="!isOnline">Offline</span>
+      </div>
     </div>
-  </div>
 
-  <h1 class="heading">Analyze Word</h1>
+    <h1 class="heading">Analyze Word</h1>
 
-  <app-text-input
-    [(inputFieldValue)]="inputValue"
-    class="input-field"
-  ></app-text-input>
+    <app-text-input
+      [(inputFieldValue)]="inputValue"
+      class="input-field"
+    ></app-text-input>
 
-  <div class="button-container">
-    <app-button
-      class="btn"
-      [text]="'COUNT VOWELS'"
-      (click)="countLetters('vowels')"
-    ></app-button>
-    <app-button
-      class="btn"
-      [text]="'COUNT CONSONANTS'"
-      (click)="countLetters('consonants')"
-    ></app-button>
-  </div>
+    <div class="button-container">
+      <app-button
+        class="btn"
+        [text]="'COUNT VOWELS'"
+        (click)="countLetters('vowels')"
+      ></app-button>
+      <app-button
+        class="btn"
+        [text]="'COUNT CONSONANTS'"
+        (click)="countLetters('consonants')"
+      ></app-button>
+    </div>
 
-  <div class="analyzed-words-container">
-    <div class="analyzed-text" *ngFor="let word of analyzedWords">
-      <app-analyzed-text [analyzedText]="word"></app-analyzed-text>
+    <div class="analyzed-words-container">
+      <div class="analyzed-text" *ngFor="let word of analyzedWords">
+        <app-analyzed-text [analyzedText]="word"></app-analyzed-text>
+      </div>
     </div>
   </div>
 </div>
